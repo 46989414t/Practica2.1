@@ -8,7 +8,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.SeekBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.lang.Math; //Importamos la clase Math de la biblioteca del API Java
 
@@ -17,18 +19,23 @@ public class Hipoteca extends AppCompatActivity {
 
     private EditText par1;
     private EditText par2;
-    private EditText par3;
+    //private EditText par3;
     private EditText par4;
     private EditText par5;
+
+   // private SeekBar seekBar;
+   private TextView textoBarra;
+   private SeekBar par3;;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_hipoteca);
-
+//INICIALITZAR VARIABLES DE CÀLCUL
         par1 = (EditText)findViewById(R.id.preuInmoble);
         par2 = (EditText)findViewById(R.id.estalvis);
-        par3 = (EditText)findViewById(R.id.plaç);
+        par3 = (SeekBar)findViewById(R.id.plaç);
         par4 = (EditText)findViewById(R.id.euribor);
         par5 = (EditText)findViewById(R.id.diferencial);
 
@@ -53,10 +60,39 @@ public class Hipoteca extends AppCompatActivity {
         };
         par1.addTextChangedListener(textWatcher);
         par2.addTextChangedListener(textWatcher);
-        par3.addTextChangedListener(textWatcher);
+        //par3.addTextChangedListener(textWatcher);
         par4.addTextChangedListener(textWatcher);
         par5.addTextChangedListener(textWatcher);
+
+        //INICIALIZA VARIABLES SEEKBAR
+      //  seekBar = (SeekBar) findViewById(R.id.seekBar1);
+      //  textoBarra = (TextView) findViewById(R.id.textoBarra1);
+        //INICIALITZA EL TEXTBARRA A 0
+      //  textoBarra.setText("Años "+seekBar.getProgress()+"/"+seekBar.getMax());
+       // textoBarra = (TextView) findViewById(R.id.textoBarra1);
+        //textoBarra = par3;
+        //textoBarra.setText("Años "+par3.getProgress()+"/"+par3.getMax());
+        //anos = ;
+        SeekBar.OnSeekBarChangeListener par3= new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                actualitzaImports();
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+
+        };
+
     }
+
 
     private void actualitzaImports() {
         final Calcula calcula = new Calcula().invoke();
@@ -71,7 +107,7 @@ public class Hipoteca extends AppCompatActivity {
         TextView textMes = (TextView)findViewById(R.id.calcMes);
         String totalHipo = String.valueOf(total);
         textTotal.setText(totalHipo);
-        String totalHipoMes =String.valueOf(totalMes);
+        String totalHipoMes = String.valueOf(totalMes);
         textMes.setText(totalHipoMes);
     }
 
@@ -97,69 +133,6 @@ public class Hipoteca extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-
-
-    public void onClacular(View view) {
-        //DecimalFormat dosdec = new DecimalFormat("#########.00");
-/*
-        EditText par1 = (EditText)findViewById(R.id.preuInmoble);
-        EditText par2 = (EditText)findViewById(R.id.estalvis);
-        EditText par3 = (EditText)findViewById(R.id.plaç);
-        EditText par4 = (EditText)findViewById(R.id.euribor);
-        EditText par5 = (EditText)findViewById(R.id.diferencial);
-
-        double floPar1 = Double.valueOf(par1.getText().toString());
-        double floPar2 = Double.valueOf(par2.getText().toString());
-        double floPar3 = Double.valueOf(par3.getText().toString());
-        double floPar4 = Double.valueOf(par4.getText().toString());
-        double floPar5 = Double.valueOf(par5.getText().toString());
-
-
-        double floInteres = floPar4+floPar5;
-        //floInteres=floInteres/12;
-        double meses = floPar3*12;
-        double capital = floPar1-floPar2;
-        double potencia = 1+(floInteres/12)/100;
-        double meses2 = meses*(-1);
-        //floPar3=floPar3*12;
-        //float total = floPar1+floPar2+floPar3+floPar4+floPar5;
-        double totalMes = (capital * (floInteres/12))/(100*(1-Math.pow(potencia, meses2)));
-
-        //double total = totalMes;
-        double total = totalMes*meses;
-        //double totalMes = floPar3+floPar4;
-/*
-        int intPar1 = Integer.parseInt(par1.getText().toString());
-        int intPar2 = Integer.parseInt(par1.getText().toString());
-        int intPar3 = Integer.parseInt(par1.getText().toString());
-        int intPar4 = Integer.parseInt(par1.getText().toString());
-        int intPar5 = Integer.parseInt(par1.getText().toString());
-
-        */
-/*
-        int total = intPar1+intPar2+intPar3+intPar4+intPar5;
-        int totalMes = total/12;
-        */
-
-
-
-        //Toast.makeText(this,"resultado "+total,Toast.LENGTH_SHORT).show();
-
-  /*      TextView textTotal = (TextView)findViewById(R.id.calcTotal);
-        TextView textMes = (TextView)findViewById(R.id.calcMes);
-        //int intCalc = Integer.parseInt(textTotal.getText().toString());
-
-        //intCalc = total;
-
-        //TextView textTotal = (TextView)findViewById(R.id.calcTotal);
-        //textTotal.setText(total);
-        String totalHipo = String.valueOf(total);
-        textTotal.setText(totalHipo);
-        String totalHipoMes =String.valueOf(totalMes);
-        textMes.setText(totalHipoMes);*/
-
-    }
-
     private class Calcula {
         private double totalMes;
         private double total;
@@ -175,7 +148,7 @@ public class Hipoteca extends AppCompatActivity {
         public Calcula invoke() {
             double floPar1 = Double.valueOf(par1.getText().toString());
             double floPar2 = Double.valueOf(par2.getText().toString());
-            double floPar3 = Double.valueOf(par3.getText().toString());
+            double floPar3 = par3.getProgress();
             double floPar4 = Double.valueOf(par4.getText().toString());
             double floPar5 = Double.valueOf(par5.getText().toString());
 
@@ -195,4 +168,5 @@ public class Hipoteca extends AppCompatActivity {
             return this;
         }
     }
+
 }

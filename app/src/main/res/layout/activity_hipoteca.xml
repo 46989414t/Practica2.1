@@ -18,7 +18,7 @@
         android:id="@+id/linearLayout"></LinearLayout>
 
     <EditText
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:inputType="number"
         android:ems="10"
@@ -27,7 +27,8 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:layout_marginTop="33dp"
-        android:text="120000" />
+        android:text="120000"
+        android:hint="Preu inmoble" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -48,8 +49,9 @@
         android:id="@+id/plaç"
         android:layout_below="@+id/estalvis"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:text="30" />
+        android:layout_alignParentEnd="true" />
+
+
 
     <EditText
         android:layout_width="wrap_content"
@@ -97,16 +99,7 @@
 
     <TextView
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Preu inmoble (€)"
-        android:id="@+id/textView"
-        android:textColor="#000000"
-        android:layout_above="@+id/estalvis"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
 
-    <TextView
-        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Estalvis"
         android:id="@+id/textView2"
@@ -124,6 +117,17 @@
         android:layout_above="@+id/euribor"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
+    <SeekBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/seekBar1"
+        android:max="60"
+        android:layout_above="@+id/euribor"
+        android:layout_alignLeft="@+id/plaç"
+        android:layout_alignStart="@+id/plaç"
+        android:layout_alignTop="@+id/textView3"
+        android:layout_alignRight="@+id/linearLayout"
+        android:layout_alignEnd="@+id/linearLayout" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -167,15 +171,15 @@
         android:layout_alignEnd="@+id/calcTotal"
         android:textColor="#ffffff" />
 
-    <SeekBar
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/seekBar"
-        android:layout_below="@+id/linearLayout"
-        android:layout_toRightOf="@+id/calcMes"
-        android:layout_marginTop="64dp"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Small Text"
+        android:id="@+id/textoBarra1"
+        android:layout_above="@+id/seekBar1"
         android:layout_alignRight="@+id/linearLayout"
-        android:layout_alignEnd="@+id/linearLayout"
-        android:max="60"/>
+        android:layout_alignEnd="@+id/linearLayout" />
+
 
 </RelativeLayout>
