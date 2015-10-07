@@ -32,14 +32,9 @@ public class Hipoteca extends AppCompatActivity {
         par4 = (EditText)findViewById(R.id.euribor);
         par5 = (EditText)findViewById(R.id.diferencial);
 
-        final Calcula calcula = new Calcula().invoke();
-        double totalMes = calcula.getTotalMes();
-        double total = calcula.getTotal();
+        actualitzaImports();
 
-
-        mostrar(totalMes, total);
-
-        par1.addTextChangedListener(new TextWatcher() {
+        TextWatcher textWatcher = new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -52,10 +47,23 @@ public class Hipoteca extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
-                new Calcula();
+                actualitzaImports();
 
             }
-        });
+        };
+        par1.addTextChangedListener(textWatcher);
+        par2.addTextChangedListener(textWatcher);
+        par3.addTextChangedListener(textWatcher);
+        par4.addTextChangedListener(textWatcher);
+        par5.addTextChangedListener(textWatcher);
+    }
+
+    private void actualitzaImports() {
+        final Calcula calcula = new Calcula().invoke();
+        double totalMes = calcula.getTotalMes();
+        double total = calcula.getTotal();
+
+        mostrar(totalMes, total);
     }
 
     private void mostrar(double totalMes, double total) {

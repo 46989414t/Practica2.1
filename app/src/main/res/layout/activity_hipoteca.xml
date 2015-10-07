@@ -14,7 +14,8 @@
         android:layout_alignBottom="@+id/calcMes"
         android:background="#3322ff"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"></LinearLayout>
+        android:layout_alignParentStart="true"
+        android:id="@+id/linearLayout"></LinearLayout>
 
     <EditText
         android:layout_width="wrap_content"
@@ -165,5 +166,16 @@
         android:layout_alignRight="@+id/calcTotal"
         android:layout_alignEnd="@+id/calcTotal"
         android:textColor="#ffffff" />
+
+    <SeekBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/seekBar"
+        android:layout_below="@+id/linearLayout"
+        android:layout_toRightOf="@+id/calcMes"
+        android:layout_marginTop="64dp"
+        android:layout_alignRight="@+id/linearLayout"
+        android:layout_alignEnd="@+id/linearLayout"
+        android:max="60"/>
 
 </RelativeLayout>
